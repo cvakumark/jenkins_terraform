@@ -16,7 +16,7 @@ pipeline {
     stages {
             stage('TerraformInit'){
             steps {
-                dir('jenkins_terraform/ec2_pipeline/'){
+                dir('ec2_pipeline/'){
                     powershell "terraform init -input=false"
                     pwd()
                    
@@ -27,7 +27,7 @@ pipeline {
 
         stage('TerraformFormat'){
             steps {
-                dir('jenkins_terraform/ec2_pipeline/'){
+                dir('ec2_pipeline/'){
                     powershell "terraform fmt -list=true -write=false -diff=true -check=true"
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
 
         stage('TerraformValidate'){
             steps {
-                dir('jenkins_terraform/ec2_pipeline/'){
+                dir('ec2_pipeline/'){
                     powershell "terraform validate"
                 }
             }
@@ -43,7 +43,7 @@ pipeline {
 
         stage('TerraformPlan'){
             steps {
-                dir('jenkins_terraform/ec2_pipeline/'){
+                dir('ec2_pipeline/'){
                     script {
                         try {
                             powershell "terraform workspace new ${params.WORKSPACE}"
@@ -70,7 +70,7 @@ pipeline {
                          currentBuild.result = 'UNSTABLE'
                     }
                     if(apply){
-                        dir('jenkins_terraform/ec2_pipeline/'){
+                        dir('ec2_pipeline/'){
                             unstash "terraform-plan"
                             powershell 'terraform apply terraform.tfplan' 
                         }
