@@ -51,8 +51,7 @@ pipeline {
                             bat "terraform workspace select ${params.WORKSPACE}"
                         }
                         
-                        bat "terraform plan -var 'access_key=%ACCESS_KEY%' -var 'secret_key=%SECRET_KEY%' \
-                        -out terraform.tfplan"
+                        bat "terraform plan -var 'access_key=%ACCESS_KEY%' -var 'secret_key=%SECRET_KEY%' -out terraform.tfplan"
                         stash name: "terraform-plan", includes: "terraform.tfplan"
                         
                     }
