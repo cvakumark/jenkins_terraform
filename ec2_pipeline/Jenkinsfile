@@ -19,7 +19,7 @@ pipeline {
                 dir('jenkins_terraform/ec2_pipeline/'){
                     powershell "terraform init -input=false"
                     pwd()
-                    // powershell ""
+                   
                    
                 }
             }
