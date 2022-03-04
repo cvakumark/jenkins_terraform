@@ -17,7 +17,7 @@ pipeline {
             stage('TerraformInit'){
             steps {
                 dir('ec2_pipeline/'){
-                    powershell "terraform init -input=false"
+                    bat "terraform init -input=false"
                     pwd()
                    
                    
@@ -28,7 +28,7 @@ pipeline {
         stage('TerraformFormat'){
             steps {
                 dir('ec2_pipeline/'){
-                    powershell "terraform fmt -list=true -write=false -diff=true -check=true"
+                    bat "terraform fmt -list=true -write=false -diff=true -check=true"
                 }
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage('TerraformValidate'){
             steps {
                 dir('ec2_pipeline/'){
-                    powershell "terraform validate"
+                    bat "terraform validate"
                 }
             }
         }
@@ -46,9 +46,9 @@ pipeline {
                 dir('ec2_pipeline/'){
                     script {
                         try {
-                            powershell "terraform workspace new ${params.WORKSPACE}"
+                            bat "terraform workspace new ${params.WORKSPACE}"
                         } catch (err) {
-                            powershell "terraform workspace select ${params.WORKSPACE}"
+                            bat "terraform workspace select ${params.WORKSPACE}"
                         }
                         
                         bat "terraform plan -var 'access_key=%ACCESS_KEY%' -var 'secret_key=%SECRET_KEY%' \
