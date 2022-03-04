@@ -18,6 +18,7 @@ pipeline {
             steps {
                 dir('jenkins-terraform-pipeline/ec2_pipeline/'){
                     powershell "terraform init -input=false"
+                    pwd()
                     // powershell ""
                     // sh "whoami"
                 }
