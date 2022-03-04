@@ -1,8 +1,8 @@
 variable "access_key" {
   type = string
-  default = "acces"
+  default = "AKIA3DJIIAFEDPYDTUX3"
 }
 variable "secret_key" {
   type = string
-  default = "secret"
+  default = "2INvNFJIRcmvSvHrUBvXSqOf4yNE+7dbxewUmggz"
 }
